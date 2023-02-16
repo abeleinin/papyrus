@@ -14,7 +14,7 @@ function! vimdoc#VimdocCompile()
   else 
     call job_start(cmd, {'out_cb': function('vimdoc#stdout'),
                        \ 'err_cb': function('vimdoc#stderr'), 
-                       \ 'exit_cb': function('vimdoc#exit')})
+                       \ 'exit_cb': function('vimdoc#exitVim')})
   endif
 endfunction
 
@@ -26,6 +26,14 @@ function! vimdoc#stderr(job_id, data, event)
   for msg in a:data
     echomsg msg
   endfor
+endfunction
+
+function! vimdoc#exitVim(job_id, exit_status)
+  if a:exit_status == 0
+    echo "Vimdoc: Compilation Succeeded!"
+  else
+    echo "Vimdoc: Compilation Failed with exit status: " . a:exit_status
+  endif
 endfunction
 
 function! vimdoc#exit(job_id, data, event)
