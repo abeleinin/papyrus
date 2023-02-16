@@ -1,6 +1,5 @@
-" Title:        Vimdoc PlunIn
-" Description:  A plugin that easily converts markdown notes into latex
-"               formats
+" Title:        Vimdoc 
+" Description:  Converts Markdown to PDF using Pandoc
 " Last Change:  2 February 2023
 " Maintainer:   Abe Leininger <https://github.com/abeleinin>
 

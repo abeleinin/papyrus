@@ -1,10 +1,21 @@
+" Title:        Vimdoc 
+" Description:  Converts Markdown to PDF using Pandoc
+" Last Change:  16 February 2023
+" Maintainer:   Abe Leininger <https://github.com/abeleinin>
+
 function! vimdoc#VimdocCompile()
   let current_md_file = expand("%")
   let pdf_file = substitute(current_md_file, '\.md$', '.pdf', '')
   let cmd = ('pandoc --pdf-engine=xelatex --template=' . g:vimdoc_template . ' -o ' . pdf_file . ' ' . current_md_file)
-  call jobstart(cmd, {'on_stdout': function('vimdoc#stdout'),
-                    \ 'on_stderr': function('vimdoc#stderr'), 
-                    \ 'on_exit': function('vimdoc#exit')})
+  if has('nvim')
+    call jobstart(cmd, {'on_stdout': function('vimdoc#stdout'),
+                      \ 'on_stderr': function('vimdoc#stderr'), 
+                      \ 'on_exit': function('vimdoc#exit')})
+  else 
+    call job_start(cmd, {'out_cb': function('vimdoc#stdout'),
+                       \ 'err_cb': function('vimdoc#stderr'), 
+                       \ 'exit_cb': function('vimdoc#exit')})
+  endif
 endfunction
 
 function! vimdoc#stdout(job_id, data, event)
@@ -33,6 +44,10 @@ function! vimdoc#VimdocOpen()
   let current_md_file = expand("%")
   let pdf_file = substitute(current_md_file, '\.md$', '.pdf', '')
   let cmd = (g:vimdoc_viewer . ' ' . pdf_file)
-  call jobstart(cmd)
+  if has('nvim')
+    call jobstart(cmd)
+  else
+    call job_start(cmd)
+  endif
 endfunction
 
