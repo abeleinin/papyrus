@@ -58,3 +58,24 @@ function! vimdoc#VimdocOpen()
   endif
 endfunction
 
+function! vimdoc#VimdocHeader()
+  let cmd = expand($HOME) . "/.local/share/nvim/plugged/vimdoc/templates/md/" . g:vimdoc_template . ".md"
+  let content = readfile(cmd)
+  call append(0, content)
+endfunction
+
+function! vimdoc#VimdocNew()
+  call vimdoc#VimdocHeader()
+  call vimdoc#VimdocCompile()
+  call vimdoc#VimdocOpen()
+  call vimdoc#VimdocAutoCompile()
+  w
+endfunction
+
+function! vimdoc#VimdocStart()
+  call vimdoc#VimdocCompile()
+  call vimdoc#VimdocOpen()
+  call vimdoc#VimdocAutoCompile()
+  w
+endfunction
+

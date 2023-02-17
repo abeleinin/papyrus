@@ -15,4 +15,7 @@ let g:loaded_vimdoc = 1
 command! -nargs=0 VimdocCompile execute vimdoc#VimdocCompile()
 command! -nargs=0 VimdocAutoCompile execute vimdoc#VimdocAutoCompile()
 command! -nargs=0 VimdocOpen execute vimdoc#VimdocOpen()
+command! -nargs=0 VimdocHeader execute vimdoc#VimdocHeader()
+command! -nargs=0 VimdocNew execute vimdoc#VimdocNew()
+command! -nargs=0 VimdocStart execute vimdoc#VimdocStart()
   
