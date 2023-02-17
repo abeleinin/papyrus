@@ -2,7 +2,9 @@
 
 ![Screenshot example of Vimdoc](https://github.com/abeleinin/vimdoc/blob/main/example.png?raw=true)
 
-Vimdoc is a markdown to PDF conversion plugin that allows users to convert a markdown file into a Latex styled PDF document. By utilizing the [Pandoc](https://pandoc.org/) library it allows users to create beautiful PDF documents giving users the flexibility to embed latex code when necessary, but using markdown otherwise.
+Theme: [material default-community](https://github.com/kaicataldo/material.vim)
+
+Vimdoc is a markdown to PDF conversion plugin that allows users to convert a markdown file into a Latex styled PDF document. By utilizing the [Pandoc](https://pandoc.org/) library it allows users to create beautiful PDF documents while only using markdown syntax.
 
 
 ## Table of contents
@@ -14,8 +16,9 @@ Vimdoc is a markdown to PDF conversion plugin that allows users to convert a mar
 
 ## Requirements
 
-- Pandoc 
-- Python3
+- [Pandoc](https://pandoc.org/installing.html)
+- [Python 3.9 +](https://www.python.org/downloads/)
+- [Latex Distribution](https://miktex.org/download)
 
 ## Installation
 
@@ -47,6 +50,5 @@ map <leader>vo :VimdocOpen<CR>
 ```
 
 ## Templates
-
 
 

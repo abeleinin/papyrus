@@ -19,8 +19,6 @@ function! vimdoc#VimdocCompile()
 endfunction
 
 function! vimdoc#stdout(job_id, data, event)
-  " echomsg a:data
-  call setqflist([{a:data}])
 endfunction
 
 function! vimdoc#stderr(job_id, data, event)
@@ -37,11 +35,11 @@ function! vimdoc#exitVim(job_id, exit_status)
   endif
 endfunction
 
-function! vimdoc#exit(job_id, data, event)
-  if a:data == 0
+function! vimdoc#exit(job_id, exit_status, event)
+  if a:exit_status == 0
     echo "Vimdoc: Compilation Succeeded!"
   else
-    echo "Vimdoc: Compilation Failed with exit status: " . a:data
+    echo "Vimdoc: Compilation Failed with exit status: " . a:exit_status
   endif
 endfunction
 
