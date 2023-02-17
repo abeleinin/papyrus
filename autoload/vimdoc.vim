@@ -19,7 +19,8 @@ function! vimdoc#VimdocCompile()
 endfunction
 
 function! vimdoc#stdout(job_id, data, event)
-  echomsg a:data
+  " echomsg a:data
+  call setqflist([{a:data}])
 endfunction
 
 function! vimdoc#stderr(job_id, data, event)
