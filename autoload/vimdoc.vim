@@ -6,7 +6,7 @@
 function! vimdoc#VimdocCompile()
   let current_md_file = expand("%")
   let pdf_file = substitute(current_md_file, '\.md$', '.pdf', '')
-  let cmd = ('pandoc --pdf-engine=xelatex --template=' . g:vimdoc_template . ' -o ' . pdf_file . ' ' . current_md_file)
+  let cmd = ('pandoc --pdf-engine=' . g:vimdoc_latex_engine . ' --template=' . g:vimdoc_template . ' -o ' . pdf_file . ' ' . current_md_file)
   if has('nvim')
     call jobstart(cmd, {'on_stdout': function('vimdoc#stdout'),
                       \ 'on_stderr': function('vimdoc#stderr'), 

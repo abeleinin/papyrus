@@ -18,7 +18,8 @@ Vimdoc is a markdown to PDF conversion plugin that allows users to convert a mar
 
 - [Pandoc](https://pandoc.org/installing.html)
 - [Python 3.9 +](https://www.python.org/downloads/)
-- [Latex Distribution](https://miktex.org/download)
+- [Latex Engine](https://pandoc.org/MANUAL.html#option--pdf-engine)
+  - Supported Engines: pdflatex, lualatex, xelatex, latexmk, tectonic, wkhtmltopdf, weasyprint, pagedjs-cli, prince, context, and pdfroff.
 
 ## Installation
 
@@ -37,6 +38,9 @@ Plugin 'abeleinin/vimdoc'
 ## Configuration
 
 ```vim
+" Specify a Latex Engine from the supported list above:
+let g:vimdoc_latex_engine = 'xelatex'
+
 " Viewer option
 let g:vimdoc_viewer = 'zathura'
 
