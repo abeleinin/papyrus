@@ -66,10 +66,7 @@ endfunction
 
 function! vimdoc#VimdocNew()
   call vimdoc#VimdocHeader()
-  call vimdoc#VimdocCompile()
-  call vimdoc#VimdocOpen()
-  call vimdoc#VimdocAutoCompile()
-  w
+  call vimdoc#VimdocStart()
 endfunction
 
 function! vimdoc#VimdocStart()

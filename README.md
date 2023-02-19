@@ -12,7 +12,8 @@ Vimdoc is a markdown to PDF conversion plugin that allows users to convert a mar
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Configuration](#configuration)
-- [Templates](#Templates)
+- [Templates](#templates)
+- [Commands](#commands)
 
 ## Requirements
 
@@ -45,14 +46,36 @@ let g:vimdoc_latex_engine = 'xelatex'
 let g:vimdoc_viewer = 'zathura'
 
 " Template option
-let g:vimdoc_template = 'notes.latex'
+let g:vimdoc_template = 'lecture'
 
 " Easy access keybinding for compiling and viewing documents
 map <leader>vc :VimdocCompile<CR>
 map <leader>va :VimdocAutoCompile<CR>
 map <leader>vo :VimdocOpen<CR>
+map <leader>vs :VimdocStart<CR>
 ```
 
 ## Templates
 
+Currently, Vimdoc supports two templates. However, custom template files can be created using [pandoc-latex-templates](https://github.com/Wandmalfarbe/pandoc-latex-template). 
+ 
+### Default
+
+
+### Lecture 
+
+
+## Commands
+
+`:VimdocCompile`: Executes a terminal command to compile the current open `md` file into a `pdf` with the same name.
+
+`:VimdocAutoCompile`: Executes a `autocmd` command that automatically runs `:VimdocCompile` whenever the file is saved.
+
+`:VimdocOpen`: Opens the current file in the specified pdf viewer from the `g:vimdoc_viewer` variable.
+
+`:VimdocStart`: Runs `:VimdocOpen` and `:VimdocAutoCompile` 
+
+`:VimdocHeader`: Copies the specified template file from the `md` templates for the specified template that is set using the `g:vimdoc_template` variable.
+
+`:VimdocNew`: Runs `:VimdocHeader` and `:VimdocStart` to create a new editing environment from the specified header.
 

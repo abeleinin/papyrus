@@ -1,3 +1,4 @@
+
 \documentclass[12pt]{article}
 \usepackage[english]{babel}
 \usepackage[utf8x]{inputenc}
@@ -8,7 +9,7 @@
 \usepackage{setspace}
 \usepackage{hyperref}
 \hypersetup{
-    colorlinks=blue,
+    colorlinks,
     citecolor=blue,
     filecolor=blue,
     linkcolor=blue,
@@ -25,7 +26,9 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode$for(hyperrefoptions)$,$hyperrefoptions$$endfor$}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
+$if(colorlinks)$
 \PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+$endif$
 $if(CJKmainfont)$
 \PassOptionsToPackage{space}{xeCJK}
 $endif$
@@ -486,7 +489,9 @@ $endif$
 \end{frame}
 $else$
 {
+$if(colorlinks)$
 \hypersetup{linkcolor=$if(toccolor)$$toccolor$$else$$endif$}
+$endif$
 \setcounter{tocdepth}{$toc-depth$}
 \tableofcontents
 }
