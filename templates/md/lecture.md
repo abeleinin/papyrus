@@ -4,7 +4,7 @@ class: Course
 professor: Professor
 semester: Semester
 author: Auther
-date: 1-1-2020
+date: xx-xx-xxxx
 colorlinks: true
 ---
 

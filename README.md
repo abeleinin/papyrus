@@ -1,11 +1,10 @@
-# Vimdoc
+# Papyrus
 
-![Screenshot example of Vimdoc](https://github.com/abeleinin/vimdoc/blob/main/example.png?raw=true)
+![Screenshot example of Papyrus](https://github.com/abeleinin/papyrus/blob/main/example.png?raw=true)
 
 Theme: [material default-community](https://github.com/kaicataldo/material.vim)
 
-Vimdoc is a markdown to PDF conversion plugin that allows users to convert a markdown file into a Latex styled PDF document. By utilizing the [Pandoc](https://pandoc.org/) library it allows users to create beautiful PDF documents while only using markdown syntax.
-
+Papyrus is a markdown to PDF conversion plugin that allows users to convert a markdown file into a Latex styled PDF document. By utilizing the [Pandoc](https://pandoc.org/) library it allows users to create beautiful PDF documents while only using markdown syntax.
 
 ## Table of contents
 
@@ -17,65 +16,90 @@ Vimdoc is a markdown to PDF conversion plugin that allows users to convert a mar
 
 ## Requirements
 
-- [Pandoc](https://pandoc.org/installing.html)
-- [Python 3.9 +](https://www.python.org/downloads/)
+- [Pandoc 2.x](https://pandoc.org/installing.html)
+- [Python 3](https://www.python.org/downloads/)
 - [Latex Engine](https://pandoc.org/MANUAL.html#option--pdf-engine)
   - Supported Engines: pdflatex, lualatex, xelatex, latexmk, tectonic, wkhtmltopdf, weasyprint, pagedjs-cli, prince, context, and pdfroff.
 
 ## Installation
 
+Add the following to your `.vimrc` or `init.vim` file to install the plug in using any plugin manager.
+
 ```vim
 " vim-plug
-Plug 'abeleinin/vimdoc'
+Plug 'abeleinin/papyrus'
 
 " packer.nvim
-use 'abeleinin/vimdoc'
+use 'abeleinin/papyrus'
 
 " vundle
-Plugin 'abeleinin/vimdoc'
+Plugin 'abeleinin/papyrus'
 ```
 
+For template support it's necessary to move the template files from `$PWD/papyrus/templates/latex` into the `$HOME/.local/share/pandoc/templates`. Either do this manually or run the following bash command:
+
+```bash
+bash install.sh
+```
 
 ## Configuration
 
+After installation, copy the following configurations into your `.vimrc` or `init.vim` file to configure Papyrus to your specifications.
+
 ```vim
 " Specify a Latex Engine from the supported list above:
-let g:vimdoc_latex_engine = 'xelatex'
+let g:papyrus_latex_engine = 'xelatex'
 
-" Viewer option
-let g:vimdoc_viewer = 'zathura'
+" Specify any built-in pdf viewing option. It's recommended to use 
+" a pdf viewer with automatic updates on save.
+let g:papyrus_viewer = 'zathura'
 
-" Template option
-let g:vimdoc_template = 'lecture'
+" Specify a Template option from the supported templates
+let g:papyrus_template = 'lecture'
 
-" Easy access keybinding for compiling and viewing documents
-map <leader>vc :VimdocCompile<CR>
-map <leader>va :VimdocAutoCompile<CR>
-map <leader>vo :VimdocOpen<CR>
-map <leader>vs :VimdocStart<CR>
+" Recommened keybinding for compiling and viewing documents
+map <leader>pc :PapyrusCompile<CR>
+map <leader>pa :PapyrusAutoCompile<CR>
+map <leader>po :PapyrusOpen<CR>
+map <leader>ps :PapyrusStart<CR>
 ```
 
 ## Templates
 
-Currently, Vimdoc supports two templates. However, custom template files can be created using [pandoc-latex-templates](https://github.com/Wandmalfarbe/pandoc-latex-template). 
+Currently, Papyrus supports two templates. However, custom template files can be created using [pandoc-latex-templates](https://github.com/Wandmalfarbe/pandoc-latex-template). If you create a cool template feel free to submit a pull request!
  
 ### Default
 
+![Default Notes Template](https://github.com/abeleinin/papyrus/blob/main/templates/pdf/default.pdf?raw=true)
 
 ### Lecture 
 
+![Lecture Notes Template](https://github.com/abeleinin/papyrus/blob/main/templates/pdf/lecture.pdf?raw=true)
 
 ## Commands
 
-`:VimdocCompile`: Executes a terminal command to compile the current open `md` file into a `pdf` with the same name.
+### :PapyrusCompile
 
-`:VimdocAutoCompile`: Executes a `autocmd` command that automatically runs `:VimdocCompile` whenever the file is saved.
+Executes a terminal command to compile the current open `md` file into a `pdf` with the same name.
 
-`:VimdocOpen`: Opens the current file in the specified pdf viewer from the `g:vimdoc_viewer` variable.
+### :PapyrusAutoCompile
 
-`:VimdocStart`: Runs `:VimdocOpen` and `:VimdocAutoCompile` 
+Executes a `autocmd` command that automatically runs `:PapyrusCompile` whenever the file is saved.
 
-`:VimdocHeader`: Copies the specified template file from the `md` templates for the specified template that is set using the `g:vimdoc_template` variable.
+### :PapyrusOpen 
 
-`:VimdocNew`: Runs `:VimdocHeader` and `:VimdocStart` to create a new editing environment from the specified header.
+Opens the current file in the specified pdf viewer from the `g:papyrus_viewer` variable.
+
+### PapyrusStart
+
+Runs `:PapyrusOpen` and `:PapyrusAutoCompile` 
+
+### PapyrusHeader
+
+Copies the specified template file from the `md` templates for the specified template that is set using the `g:papyrus_template` variable.
+
+### PapyrusNew
+
+Runs `:PapyrusHeader` and `:PapyrusStart` to create a new editing environment from the specified header.
+
 
