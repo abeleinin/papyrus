@@ -84,12 +84,12 @@ Currently, Papyrus supports two templates which you can view in the [pdf directo
  
 ### Default
 
-https://user-images.githubusercontent.com/95333017/219988665-7863ea26-ed87-4264-8129-b70eebd582f4.mp4
+https://user-images.githubusercontent.com/95333017/220019753-b45b7ae5-59a0-4ac0-85e5-c228ff35544c.mov
 
 
 ### Lecture 
 
-https://user-images.githubusercontent.com/95333017/219988681-701f9134-1407-44c0-8365-0a83b65337af.mp4
+https://user-images.githubusercontent.com/95333017/220019833-a01ba926-bfc8-4dd8-a6f3-d3f6bc611263.mov
 
 
 ## Commands
