@@ -70,11 +70,11 @@ Currently, Papyrus supports two templates. However, custom template files can be
  
 ### Default
 
-![Default Notes Template](https://github.com/abeleinin/papyrus/blob/main/templates/pdf/default.pdf?raw=true)
+![Default Notes Template](https://github.com/abeleinin/papyrus/blob/main/templates/pdf/default.png?raw=true)
 
 ### Lecture 
 
-![Lecture Notes Template](https://github.com/abeleinin/papyrus/blob/main/templates/pdf/lecture.pdf?raw=true)
+![Lecture Notes Template](https://github.com/abeleinin/papyrus/blob/main/templates/pdf/lecture.png?raw=true)
 
 ## Commands
 
