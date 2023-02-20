@@ -1,5 +1,7 @@
 # Papyrus
 
+Easily convert Markdown notes into beautiful Latex PDF's
+
 ![Screenshot example of Papyrus](https://github.com/abeleinin/papyrus/blob/main/examples/example.png?raw=true)
 
 Theme: [material default-community](https://github.com/kaicataldo/material.vim)
@@ -91,15 +93,15 @@ Executes a `autocmd` command that automatically runs `:PapyrusCompile` whenever 
 
 Opens the current file in the specified pdf viewer from the `g:papyrus_viewer` variable.
 
-### PapyrusStart
+### :PapyrusStart
 
 Runs `:PapyrusOpen` and `:PapyrusAutoCompile` 
 
-### PapyrusHeader
+### :PapyrusHeader
 
 Copies the specified template file from the `md` templates for the specified template that is set using the `g:papyrus_template` variable.
 
-### PapyrusNew
+### :PapyrusNew
 
 Runs `:PapyrusHeader` and `:PapyrusStart` to create a new editing environment from the specified header.
 
