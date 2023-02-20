@@ -14,7 +14,7 @@ let g:loaded_papyrus = 1
 " Exposes the plugin's functions for use as commands in Vim.
 command! -nargs=0 PapyrusCompile execute papyrus#PapyrusCompile()
 command! -nargs=0 PapyrusAutoCompile execute papyrus#PapyrusAutoCompile()
-command! -nargs=0 PapyrusOpen execute papyrus#PapyrusOpen()
+command! -nargs=0 PapyrusView execute papyrus#PapyrusView()
 command! -nargs=0 PapyrusHeader execute papyrus#PapyrusHeader()
 command! -nargs=0 PapyrusNew execute papyrus#PapyrusNew()
 command! -nargs=0 PapyrusStart execute papyrus#PapyrusStart()
