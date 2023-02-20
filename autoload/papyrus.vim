@@ -62,11 +62,15 @@ function! papyrus#PapyrusHeader()
   let cmd = expand($HOME) . "/.local/share/nvim/plugged/papyrus/templates/md/" . g:papyrus_template . ".md"
   let content = readfile(cmd)
   call append(0, content)
+  w
 endfunction
 
 function! papyrus#PapyrusNew()
   call papyrus#PapyrusHeader()
-  call papyrus#PapyrusStart()
+  call papyrus#PapyrusCompile()
+  sleep 2500m
+  call papyrus#PapyrusOpen()
+  call papyrus#PapyrusAutoCompile()
 endfunction
 
 function! papyrus#PapyrusStart()
