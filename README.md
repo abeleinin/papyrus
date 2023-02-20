@@ -44,6 +44,7 @@ For template support it's necessary to move the template files from `$PWD/papyru
 bash install.sh
 ```
 
+
 ## Configuration
 
 After installation, copy the following configurations into your `.vimrc` or `init.vim` file to configure Papyrus to your specifications.
@@ -72,11 +73,12 @@ Currently, Papyrus supports two templates which you can view in the [pdf directo
  
 ### Default
 
-![Default Notes Template](https://drive.google.com/file/d/1Sb21ZZzGyPPVsLazesxSIxbQiTguYL2C/view?usp=sharing)
+https://user-images.githubusercontent.com/95333017/219988665-7863ea26-ed87-4264-8129-b70eebd582f4.mp4
+
 
 ### Lecture 
 
-![Lecture Notes Template](https://drive.google.com/file/d/1RuoRXyQvpiVZEQMVOw75ii20ctQxmbrt/view?usp=sharing)
+https://user-images.githubusercontent.com/95333017/219988681-701f9134-1407-44c0-8365-0a83b65337af.mp4
 
 
 ## Commands
