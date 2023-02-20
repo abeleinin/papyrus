@@ -1,6 +1,6 @@
 # Papyrus
 
-![Screenshot example of Papyrus](https://github.com/abeleinin/papyrus/blob/main/example.png?raw=true)
+![Screenshot example of Papyrus](https://github.com/abeleinin/papyrus/blob/main/examples/example.png?raw=true)
 
 Theme: [material default-community](https://github.com/kaicataldo/material.vim)
 
@@ -66,15 +66,16 @@ map <leader>ps :PapyrusStart<CR>
 
 ## Templates
 
-Currently, Papyrus supports two templates. However, custom template files can be created using [pandoc-latex-templates](https://github.com/Wandmalfarbe/pandoc-latex-template). If you create a cool template feel free to submit a pull request!
+Currently, Papyrus supports two templates which you can view in the [pdf directory](https://github.com/abeleinin/papyrus/tree/main/templates/pdf). However, custom template files can be created using [pandoc-latex-templates](https://github.com/Wandmalfarbe/pandoc-latex-template). If you create a cool template feel free to submit a pull request!
  
 ### Default
 
-![Default Notes Template](https://github.com/abeleinin/papyrus/blob/main/templates/pdf/default.png?raw=true)
+![Default Notes Template](https://github.com/abeleinin/papyrus/blob/main/examples/default.png?raw=true)
 
 ### Lecture 
 
-![Lecture Notes Template](https://github.com/abeleinin/papyrus/blob/main/templates/pdf/lecture.png?raw=true)
+![Lecture Notes Template](https://github.com/abeleinin/papyrus/blob/main/examples/lecture.png?raw=true)
+
 
 ## Commands
 
