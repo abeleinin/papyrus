@@ -47,7 +47,7 @@ function! papyrus#PapyrusAutoCompile()
   autocmd BufWrite *.md :call papyrus#PapyrusCompile()
 endfunction
 
-function! papyrus#PapyrusOpen()
+function! papyrus#PapyrusView()
   let current_md_file = expand("%")
   let pdf_file = substitute(current_md_file, '\.md$', '.pdf', '')
   let cmd = (g:papyrus_viewer . ' ' . pdf_file)
@@ -69,13 +69,13 @@ function! papyrus#PapyrusNew()
   call papyrus#PapyrusHeader()
   call papyrus#PapyrusCompile()
   sleep 2500m
-  call papyrus#PapyrusOpen()
+  call papyrus#PapyrusView()
   call papyrus#PapyrusAutoCompile()
 endfunction
 
 function! papyrus#PapyrusStart()
   call papyrus#PapyrusCompile()
-  call papyrus#PapyrusOpen()
+  call papyrus#PapyrusView()
   call papyrus#PapyrusAutoCompile()
   w
 endfunction
