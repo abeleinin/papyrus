@@ -58,7 +58,7 @@ let g:papyrus_latex_engine = 'xelatex'
 let g:papyrus_viewer = 'zathura'
 
 " Specify a Template option from the supported templates
-let g:papyrus_template = 'lecture'
+let g:papyrus_template = 'default'
 
 " Recommened keybinding for compiling and viewing documents
 map <leader>pc :PapyrusCompile<CR>
