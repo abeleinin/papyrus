@@ -11,7 +11,7 @@ Papyrus is a Markdown to PDF conversion plugin that allows users to convert a ma
 **Features**
 
 - Supports Latex syntax in Markdown file!
-- Ability to custom templates!
+- Ability to create custom templates!
 - Fast compile time!
 
 ## Table of contents
@@ -123,7 +123,8 @@ Runs `:PapyrusHeader` and `:PapyrusStart` to create a new editing environment fo
 
 ## Demo
 
+This is a demo from my notes on the [Book of Proof](https://www.people.vcu.edu/~rhammack/BookOfProof/Main.pdf). I'm using the [Vim Pandoc Syntax](https://github.com/vim-pandoc/vim-pandoc-syntax) plugin to automatically insert special characters and clean up the document. Also, in the demo you can see that pandoc supports the ability to insert Latex syntax inside the Markdown document.
+
 https://user-images.githubusercontent.com/95333017/220041898-7326b76d-348e-4bf4-95dd-b4a879527ed5.mov
 
-This is a demo from my notes on the [Book of Proof](https://www.people.vcu.edu/~rhammack/BookOfProof/Main.pdf). I'm using the [Vim Pandoc Syntax](https://github.com/vim-pandoc/vim-pandoc-syntax) plugin to automatically insert special characters and clean up the document. Also, in the demo you can see that pandoc supports the ability to instert Latex syntax inside the Markdown document.
 
