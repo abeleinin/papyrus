@@ -72,11 +72,11 @@ Currently, Papyrus supports two templates which you can view in the [pdf directo
  
 ### Default
 
-![Default Notes Template](https://github.com/abeleinin/papyrus/blob/main/examples/default.png?raw=true)
+![Default Notes Template](https://drive.google.com/file/d/1QY_Utp6fqCTafJQPwaBFMQLDOReCHIme/view?usp=sharing)
 
 ### Lecture 
 
-![Lecture Notes Template](https://github.com/abeleinin/papyrus/blob/main/examples/lecture.png?raw=true)
+![Lecture Notes Template](https://drive.google.com/file/d/1RfikL3xwjepSz5AOvGdfGG-yvBjP1A7e/view?usp=sharing)
 
 
 ## Commands
