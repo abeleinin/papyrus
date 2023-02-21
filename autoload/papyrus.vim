@@ -1,82 +1,97 @@
 " Title:        Papyrus
 " Description:  Converts Markdown to PDF using Pandoc
-" Last Change:  19 February 2023
+" Last Change:  21 February 2023
 " Maintainer:   Abe Leininger <https://github.com/abeleinin>
 
 function! papyrus#PapyrusCompile()
   let current_md_file = expand("%")
   let pdf_file = substitute(current_md_file, '\.md$', '.pdf', '')
-  let cmd = ('pandoc --pdf-engine=' . g:papyrus_latex_engine . ' --template=' . g:papyrus_template . ' -o ' . pdf_file . ' ' . current_md_file)
+  if g:papyrus_template == ''
+    let cmd = ('pandoc --pdf-engine=' . g:papyrus_latex_engine . ' ' . g:papyrus_pandoc_args . ' -o ' . pdf_file . ' ' . current_md_file)
+  else
+    let cmd = ('pandoc --pdf-engine=' . g:papyrus_latex_engine . ' --template=' . g:papyrus_template . ' -o ' . pdf_file . ' ' . current_md_file)
+  endif
   if has('nvim')
-    call jobstart(cmd, {'on_stdout': function('papyrus#stdout'),
-                      \ 'on_stderr': function('papyrus#stderr'), 
-                      \ 'on_exit': function('papyrus#exitnvim')})
+    call setqflist([], 'r')
+    call jobstart(cmd, {'on_stderr': function('papyrus#stderr'), 
+                        \ 'on_exit': function('papyrus#exitnvim')})
   else 
-    call job_start(cmd, {'out_cb': function('papyrus#stdout'),
-                       \ 'err_cb': function('papyrus#stderr'), 
+    call job_start(cmd, {'err_cb': function('papyrus#stderr'), 
                        \ 'exit_cb': function('papyrus#exitvim')})
   endif
 endfunction
 
-function! papyrus#stdout(job_id, data, event)
-endfunction
-
 function! papyrus#stderr(job_id, data, event)
-  for msg in a:data
-    echomsg msg
-  endfor
+  call setqflist(map(copy(a:data), '{ "text": v:val, "type": "E"}'), 'a')
 endfunction
 
 function! papyrus#exitvim(job_id, exit_status)
   if a:exit_status == 0
     echo "Papyrus: Compilation Succeeded!"
+    if s:papyrus_await_view == 1
+      call papyrus#PapyrusView()
+      let s:papyrus_await_view = 0
+    endif
   else
-    echo "Papyrus: Compilation Failed with exit status: " . a:exit_status
+    echo "Papyrus: Compilation Failed with exit status " . a:exit_status
   endif
 endfunction
 
 function! papyrus#exitnvim(job_id, exit_status, event)
   if a:exit_status == 0
     echo "Papyrus: Compilation Succeeded!"
+    if s:papyrus_await_view == 1
+      call papyrus#PapyrusView()
+      let s:papyrus_await_view = 0
+    endif
   else
-    echo "Papyrus: Compilation Failed with exit status: " . a:exit_status
+    echo "Papyrus: Compilation Failed with exit status " . a:exit_status
   endif
 endfunction
 
 function! papyrus#PapyrusAutoCompile()
-  autocmd BufWrite *.md :call papyrus#PapyrusCompile()
+  execute "autocmd " . g:papyrus_autocompile . " *.md :call papyrus#PapyrusCompile()"
 endfunction
 
 function! papyrus#PapyrusView()
   let current_md_file = expand("%")
   let pdf_file = substitute(current_md_file, '\.md$', '.pdf', '')
   let cmd = (g:papyrus_viewer . ' ' . pdf_file)
-  if has('nvim')
-    call jobstart(cmd)
+  if filereadable(pdf_file)
+    if has('nvim')
+      call jobstart(cmd)
+    else
+      call job_start(cmd)
+    endif
   else
-    call job_start(cmd)
+    echo "Papyrus: " . pdf_file "not found."
   endif
 endfunction
 
 function! papyrus#PapyrusHeader()
-  let cmd = expand($HOME) . "/.local/share/nvim/plugged/papyrus/templates/md/" . g:papyrus_template . ".md"
-  let content = readfile(cmd)
-  call append(0, content)
-  w
+  if g:papyrus_template == ""
+    echo "Papyrus: Template is not set. Set g:papyrus_template variable to use the :PapyrusHeader function"
+  else
+    let plugin_path = expand('<script>:p:h:h')
+    let template_path = plugin_path . '/templates/md/' . g:papyrus_template . '.md' 
+    let header = readfile(template_path)
+    call append(0, header)
+    w
+  endif
 endfunction
 
+let s:papyrus_await_view = 0
+
 function! papyrus#PapyrusNew()
+  let s:papyrus_await_view = 1
   call papyrus#PapyrusHeader()
   call papyrus#PapyrusCompile()
-  sleep 2500m
-  call papyrus#PapyrusView()
   call papyrus#PapyrusAutoCompile()
 endfunction
 
 function! papyrus#PapyrusStart()
+  let s:papyrus_await_view = 1
   call papyrus#PapyrusCompile()
-  call papyrus#PapyrusView()
   call papyrus#PapyrusAutoCompile()
-  w
 endfunction
 

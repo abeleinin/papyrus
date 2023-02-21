@@ -1,10 +1,48 @@
+% Scribe Settings 
+\def\ScribeStr{}
+\def\LecStr{}
+\def\LecNum{}
+\def\LecTitle{}
+\def\LecDate{}
+\def\SemStr{}
+\def\ClassStr{}
+\newcommand{\Scribe}[1]{\def\ScribeStr{#1}}
+\newcommand{\Scribes}[1]{\def\ScribeStr{#1}}
+\newcommand{\Lecturer}[1]{\def\LecStr{#1}}
+\newcommand{\Lecturers}[1]{\def\LecStr{#1}}
+\newcommand{\LectureNumber}[1]{\def\LecNum{#1}}
+\newcommand{\LectureTitle}[1]{\def\LecTitle{#1}}
+\newcommand{\LectureDate}[1]{\def\LecDate{#1}}
+\newcommand{\Semester}[1]{\def\SemStr{#1}}
+\newcommand{\Class}[1]{\def\ClassStr{#1}}
 
+\newdimen\headerwidth
+
+\newcommand{\MakeScribeTop}{
+\noindent
+\begin{center}
+  \framebox{
+    \vbox{
+      \headerwidth=\textwidth
+      \advance\headerwidth by -0.22in
+      \hbox to \headerwidth {{ {\SemStr} \hfill {\ClassStr}}}
+      \vspace{4mm}
+      \hbox to \headerwidth {{\Large \hfill {\LecTitle} \hfill}}
+      \vspace{2mm}
+      \hbox to \headerwidth {\hfill \LecDate \hfill}
+      \vspace{2mm}
+      \hbox to \headerwidth {{\it \LecStr \hfill \ScribeStr}}
+      }
+    }
+\end{center}
+\vspace*{4mm}}
+
+% Latex document
 \documentclass[12pt]{article}
 \usepackage[english]{babel}
 \usepackage[utf8x]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{titletoc}
-\usepackage{$HOME/.local/share/nvim/plugged/vimdoc/templates/scribe}
 \usepackage{listings}
 \usepackage{setspace}
 \usepackage{hyperref}
@@ -16,8 +54,6 @@
     urlcolor=blue,
 }
 \setstretch{1.2}
-
-\lstset{style=mystyle}
 
 \usepackage{amsmath, amsthm, amssymb, calrsfs, wasysym, verbatim, bbm, color, graphics, geometry}
 
@@ -550,3 +586,4 @@ $include-after$
 
 $endfor$
 \end{document}
+

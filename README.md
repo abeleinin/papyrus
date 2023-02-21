@@ -1,24 +1,26 @@
 # Papyrus
 
-Easily convert Markdown notes into beautiful Latex PDFs in Vim
+Automatically compile Markdown notes into beautiful Latex PDFs in Vim.
 
 ![Screenshot example of Papyrus](https://github.com/abeleinin/papyrus/blob/main/examples/example.png?raw=true)
 
 Theme: [material default-community](https://github.com/kaicataldo/material.vim)
 
-Papyrus is a Markdown to PDF conversion plugin that allows users to convert a markdown file into a Latex styled PDF document. By utilizing the [Pandoc](https://pandoc.org/) universal document converter we can write both Markdown and Latex syntax in the same file and convert it into a PDF.
+Papyrus is a asynchronous Markdown to PDF conversion plugin that allows users to have a latex-like editing experience while writing Markdown. By utilizing the [Pandoc](https://pandoc.org/) universal document converter you can write both Markdown and Latex syntax in the same file and convert it into a PDF.
 
 **Features**
 
-- Supports Latex syntax in Markdown file!
-- Ability to create custom templates!
-- Fast compile time!
+- Asynchronous compilation
+- Supports Latex syntax in Markdown file
+- Ability to set custom pandoc compilation arguments
+- Optional templates
 
 ## Table of contents
 
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Configuration](#configuration)
+- [Errors Messages](#error-messages)
 - [Templates](#templates)
 - [Commands](#commands)
 - [Demo](#demo)
@@ -47,42 +49,59 @@ use 'abeleinin/papyrus'
 Plugin 'abeleinin/papyrus'
 ```
 
-I *strongly* recommmend to also install the [vim-pandoc-syntax](https://github.com/vim-pandoc/vim-pandoc-syntax) plugin to vizualize Latex special characters.
+I *strongly* recommend to also install the [vim-pandoc-syntax](https://github.com/vim-pandoc/vim-pandoc-syntax) plugin to visualize Latex special characters.
 
-### Latex Templates
+### Pandoc Templates
+
+**Templates are optional** so only if you choose to use templates do the following:
 
 Move the Latex template files from wherever your plugin are installed (`~/papyrus/templates/latex/*`) to the pandoc templates folder. The pandoc template folder depends on the OS you're using:
 
 - Unix, Linux, macOS: `$HOME/.local/share/pandoc/templates` or `$HOME/.pandoc/templates`
 - Windows: `C:\$HOME\AppData\Roaming\pandoc\templates`
 
-If the folder `template` or `pandoc` folder doesn't exist then you need to create them and put the template files into the directory. You can also file the default user data direction by checking `pandoc --version`.
+If the `templates` or `pandoc` folder doesn't exist then you need to create them and put the template files into the new directory. You can also find the default *User data directory* by checking `pandoc --version`.
 
 ## Configuration
 
-After installation, copy the following configurations into your `.vimrc` or `init.vim` file to configure Papyrus to your specifications.
+After installation, copy the following configurations into your `.vimrc` or `init.vim` file to configure Papyrus to your specification.
 
 ```vim
-" Specify a Latex Engine from the supported list above:
+" Specify a Latex Engine from the supported list above
 let g:papyrus_latex_engine = 'xelatex'
 
 " Specify any built-in pdf viewing option. It's recommended to use 
 " a pdf viewer with automatic updates on save.
 let g:papyrus_viewer = 'zathura'
 
-" Specify a Template option from the supported templates
-let g:papyrus_template = 'default'
-
 " Recommened keybinding for compiling and viewing documents
 map <leader>pc :PapyrusCompile<CR>
 map <leader>pa :PapyrusAutoCompile<CR>
-map <leader>po :PapyrusView<CR>
+map <leader>pv :PapyrusView<CR>
 map <leader>ps :PapyrusStart<CR>
 ```
 
+### Optional
+
+`g:papyrus_template`: Specify a template option from the ones supported.
+
+`g:papyrus_pandoc_args`: Add custom [pandoc compilation](https://pandoc.org/MANUAL.html#general-writer-options) arguments.
+
+`g:papyrus_autocompile`: Default set to `BufWrite` alternative [autocmd events](https://neovim.io/doc/user/autocmd.html#autocmd-events) can be used to trigger auto-compilation.
+
+## Error Messages
+
+After every compilation either the message `Papyrus: Compilation Succeeded!` will appear at the bottom of the window or `Papyrus: Compilation Failed with exit status X`. After a failed compilation the **pandoc compilation errors are displayed in a quickfix list** which can be viewed using `:copen`.
+
+
 ## Templates
 
-Currently, Papyrus supports two templates which you can view in the [pdf directory](https://github.com/abeleinin/papyrus/tree/main/templates/pdf). However, custom template files can be created using [pandoc-latex-templates](https://github.com/Wandmalfarbe/pandoc-latex-template). If you create a cool template feel free to submit a pull request!
+Papyrus supports two templates which you can view in the [pdf directory](https://github.com/abeleinin/papyrus/tree/main/templates/pdf). Custom template files can be created using [pandoc-latex-templates](https://github.com/Wandmalfarbe/pandoc-latex-template). If you create a cool template feel free to submit a pull request!
+
+```vim
+" Specify the current template by its file name 
+let g:papyrus_template = 'default'
+```
  
 ### Default
 
@@ -98,11 +117,11 @@ https://user-images.githubusercontent.com/95333017/220019833-a01ba926-bfc8-4dd8-
 
 ### :PapyrusCompile
 
-Executes a `pandoc` command in the terminal to compile the current open `md` file into a `pdf` with the same name using the specified template.
+Executes a `pandoc` command using `jobstart` to compile the current open `md` file into a `pdf` with the same name using either the `g:papyrus_pandoc_args` or `g:papyrus_template`.
 
 ### :PapyrusAutoCompile
 
-Executes an `autocmd` command that automatically runs `:PapyrusCompile` whenever the file is saved.
+Executes an `autocmd` when the `g:papyrus_autocompile` event is triggered which runs `:PapyrusCompile`.
 
 ### :PapyrusView 
 
@@ -110,11 +129,11 @@ Opens the current file in the specified pdf viewer from the `g:papyrus_viewer` v
 
 ### :PapyrusStart
 
-Runs `:PapyrusView` and `:PapyrusAutoCompile` to automatically 
+Runs `:PapyrusView` and `:PapyrusAutoCompile` to automatically start an editing environment.
 
 ### :PapyrusHeader
 
-Copies the specified template file from the `md` templates for the template set using the `g:papyrus_template` variable.
+Copies the specified template file into the current file from `/templates/md/g:papyrus_template`.
 
 ### :PapyrusNew
 
