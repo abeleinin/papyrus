@@ -3,13 +3,21 @@
 " Last Change:  22 February 2023
 " Maintainer:   Abe Leininger <https://github.com/abeleinin>
 
-function! papyrus#PapyrusCompile()
+function! papyrus#PapyrusCompile(output_format)
+  if !empty(a:output_format)
+    let g:papyrus_output_format = a:output_format
+  endif
   let current_md_file = expand('%')
-  let pdf_file = substitute(current_md_file, '\.md$', '.pdf', '') 
-  if g:papyrus_template == ''
-    let cmd = ('pandoc --pdf-engine=' . g:papyrus_latex_engine . ' ' . g:papyrus_pandoc_args . ' -o ' . pdf_file . ' ' . current_md_file)
+  let s:output_file = substitute(current_md_file, '\.md$', '.' . g:papyrus_output_format, '') 
+  if g:papyrus_output_path == ''
+    let path_to_file = s:output_file 
   else
-    let cmd = ('pandoc --pdf-engine=' . g:papyrus_latex_engine . ' --template=' . g:papyrus_template . ' -o ' . pdf_file . ' ' . current_md_file)
+    let path_to_file = $HOME . g:papyrus_output_path . s:output_file 
+  endif
+  if g:papyrus_template == ''
+    let cmd = ('pandoc --pdf-engine=' . g:papyrus_latex_engine . ' ' . g:papyrus_pandoc_args . ' -o ' . path_to_file . ' ' . current_md_file)
+  else
+    let cmd = ('pandoc --pdf-engine=' . g:papyrus_latex_engine . ' --template=' . g:papyrus_template . ' -o ' . path_to_file . ' ' . current_md_file)
   endif
   if has('nvim')
     call setqflist([], 'r')
@@ -63,22 +71,34 @@ function! papyrus#exit_nvim(job_id, exit_status, event)
   endif
 endfunction
 
-function! papyrus#PapyrusAutoCompile()
-  execute 'autocmd ' . g:papyrus_autocompile . ' *.md :call papyrus#PapyrusCompile()'
+function! papyrus#PapyrusAutoCompile(output_format)
+  if !empty(a:output_format)
+    let g:papyrus_output_format = a:output_format
+  endif
+  execute 'autocmd ' . g:papyrus_autocompile . " *.md :call papyrus#PapyrusCompile('" . g:papyrus_output_format . "')"
 endfunction
 
 function! papyrus#PapyrusView()
   let current_md_file = expand('%')
-  let pdf_file = substitute(current_md_file, '\.md$', '.pdf', '')
-  let cmd = (g:papyrus_viewer . ' ' . pdf_file)
-  if filereadable(pdf_file)
+  let output_file = substitute(current_md_file, '\.md$', '.' . g:papyrus_output_format, '')
+  if g:papyrus_output_path == ''
+    let path_to_file = output_file 
+  else
+    let path_to_file = $HOME . g:papyrus_output_path . output_file 
+  endif
+  let cmd = (g:papyrus_viewer . ' ' . path_to_file)
+  if filereadable(path_to_file)
     if has('nvim')
       call jobstart(cmd)
     else
       call job_start(cmd)
     endif
   else
-    echo 'Papyrus: ' . pdf_file 'not found.'
+    if g:papyrus_output_path == ''
+      echo 'Papyrus: ' . output_file 'not found in current directory.'
+    else
+      echo 'Papyrus: ' . output_file 'not found in ' . g:papyrus_output_path 
+    endif 
   endif
 endfunction
 
@@ -87,7 +107,7 @@ function! papyrus#PapyrusHeader()
     echo 'Papyrus: Template is not set. Set g:papyrus_template variable to use the :PapyrusHeader function'
   else
     let plugin_path = expand('<script>:p:h:h')
-    let template_path = plugin_path . '/templates/md/' . g:papyrus_template . '.md' 
+    let template_path = plugin_path . '/templates/md/' . g:papyrus_template . '.md' k
     let header = readfile(template_path)
     call append(0, header)
     w
@@ -96,16 +116,16 @@ endfunction
 
 let s:papyrus_await_view = 0
 
-function! papyrus#PapyrusNew()
+function! papyrus#PapyrusNew(output_format)
   let s:papyrus_await_view = 1
   call papyrus#PapyrusHeader()
-  call papyrus#PapyrusCompile()
-  call papyrus#PapyrusAutoCompile()
+  call papyrus#PapyrusCompile(a:output_format)
+  call papyrus#PapyrusAutoCompile(a:output_format)
 endfunction
 
-function! papyrus#PapyrusStart()
+function! papyrus#PapyrusStart(output_format)
   let s:papyrus_await_view = 1
-  call papyrus#PapyrusCompile()
-  call papyrus#PapyrusAutoCompile()
+  call papyrus#PapyrusCompile(a:output_format)
+  call papyrus#PapyrusAutoCompile(a:output_format)
 endfunction
 

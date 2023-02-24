@@ -20,10 +20,17 @@ if !exists('g:papyrus_autocompile')
   let g:papyrus_autocompile = 'BufWrite'
 endif
 
-command! -nargs=0 PapyrusCompile execute papyrus#PapyrusCompile()
-command! -nargs=0 PapyrusAutoCompile execute papyrus#PapyrusAutoCompile()
+if !exists('g:papyrus_output_format')
+  let g:papyrus_output_format = 'pdf'
+endif
+
+if !exists('g:papyrus_output_path')
+  let g:papyrus_output_path = ''
+endif
+
+command! -nargs=* PapyrusCompile execute papyrus#PapyrusCompile(<q-args>)
+command! -nargs=* PapyrusAutoCompile execute papyrus#PapyrusAutoCompile(<q-args>)
 command! -nargs=0 PapyrusView execute papyrus#PapyrusView()
 command! -nargs=0 PapyrusHeader execute papyrus#PapyrusHeader()
-command! -nargs=0 PapyrusNew execute papyrus#PapyrusNew()
-command! -nargs=0 PapyrusStart execute papyrus#PapyrusStart()
-  
+command! -nargs=* PapyrusNew execute papyrus#PapyrusNew(<q-args>)
+command! -nargs=* PapyrusStart execute papyrus#PapyrusStart(<q-args>)
