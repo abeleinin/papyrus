@@ -135,7 +135,7 @@ Runs `:PapyrusView` and `:PapyrusAutoCompile` to automatically start an editing 
 
 Copies the specified template file into the current file from `/templates/md/g:papyrus_template`.
 
-### :PapyrusNew \<optional\>
+### :PapyrusNew 
 
 Runs `:PapyrusHeader` and `:PapyrusStart` to create a new editing environment for the specified template. 
 

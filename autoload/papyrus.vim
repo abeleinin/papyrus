@@ -107,7 +107,7 @@ function! papyrus#PapyrusHeader()
     echo 'Papyrus: Template is not set. Set g:papyrus_template variable to use the :PapyrusHeader function'
   else
     let plugin_path = expand('<script>:p:h:h')
-    let template_path = plugin_path . '/templates/md/' . g:papyrus_template . '.md' k
+    let template_path = plugin_path . '/templates/md/' . g:papyrus_template . '.md'
     let header = readfile(template_path)
     call append(0, header)
     w
@@ -116,11 +116,11 @@ endfunction
 
 let s:papyrus_await_view = 0
 
-function! papyrus#PapyrusNew(output_format)
+function! papyrus#PapyrusNew()
   let s:papyrus_await_view = 1
   call papyrus#PapyrusHeader()
-  call papyrus#PapyrusCompile(a:output_format)
-  call papyrus#PapyrusAutoCompile(a:output_format)
+  call papyrus#PapyrusCompile(g:papyrus_output_format)
+  call papyrus#PapyrusAutoCompile(g:papyrus_output_format)
 endfunction
 
 function! papyrus#PapyrusStart(output_format)
