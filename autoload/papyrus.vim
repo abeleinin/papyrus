@@ -1,7 +1,6 @@
 " Title:        Papyrus
 " Description:  Converts Markdown to PDF using Pandoc
-" Last Change:  22 February 2023
-" Maintainer:   Abe Leininger <https://github.com/abeleinin>
+" Last Change:  22 February 2023 Maintainer:   Abe Leininger <https://github.com/abeleinin>
 
 function! papyrus#PapyrusCompile(output_format)
   if !empty(a:output_format)
@@ -31,7 +30,7 @@ function! papyrus#PapyrusCompile(output_format)
 endfunction
 
 function! papyrus#stderr_vim(job_id, data)
-    let qf_list = []
+  let qf_list = []
   let text = split(a:data, '\n')
   for l:item in text
     call add(qf_list, {'text': l:item, 'type': 'E'})

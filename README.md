@@ -6,7 +6,7 @@ Automatically compile Markdown notes into beautiful Latex PDFs or other support 
 
 Theme: [material default-community](https://github.com/kaicataldo/material.vim)
 
-Papyrus is a asynchronous Markdown conversion plugin that allows users to have a latex-like editing experience while writing Markdown. By utilizing the [Pandoc](https://pandoc.org/) universal document converter you can write both Markdown and Latex syntax in the same file and convert it into a PDF or other Pandoc supported document types.
+Papyrus is an asynchronous Markdown conversion plugin that allows users to have a latex-like editing experience while writing Markdown. By utilizing the [Pandoc](https://pandoc.org/) universal document converter you can write both Markdown and Latex syntax in the same file and convert it into a PDF or other Pandoc supported document types.
 
 **Features**
 
@@ -48,13 +48,13 @@ use 'abeleinin/papyrus'
 Plugin 'abeleinin/papyrus'
 ```
 
-I *strongly* recommend to also install the [vim-pandoc-syntax](https://github.com/vim-pandoc/vim-pandoc-syntax) plugin to visualize Latex special characters.
+I *strongly* recommend also installing the [vim-pandoc-syntax](https://github.com/vim-pandoc/vim-pandoc-syntax) plugin to visualize Latex special characters.
 
 ### Pandoc Templates
 
 **Templates are optional** 
 
-Move the Latex template files from wherever your plugin are installed (`~/papyrus/templates/latex/*`) to the pandoc templates folder. The pandoc template folder depends on the OS you're using:
+Move the Latex template files from wherever your plugin is installed (`~/papyrus/templates/latex/*`) to the pandoc templates folder. The pandoc template folder depends on the OS you're using:
 
 - Unix, Linux, macOS: `$HOME/.local/share/pandoc/templates` or `$HOME/.pandoc/templates`
 - Windows: `C:\$HOME\AppData\Roaming\pandoc\templates`
@@ -73,8 +73,8 @@ let g:papyrus_latex_engine = 'xelatex'
 " a pdf viewer with automatic updates on save.
 let g:papyrus_viewer = 'zathura'
 
-" Recommened keybinding for compiling and viewing documents
-" Adding optional formatings is also possible by 
+" Recommended keybinding for compiling and viewing documents
+" Adding optional formattings is also possible by 
 map <leader>pc :PapyrusCompile<CR>
 map <leader>pa :PapyrusAutoCompile<CR>
 map <leader>pv :PapyrusView<CR>
@@ -89,13 +89,13 @@ map <leader>ps :PapyrusStart<CR>
 
 `g:papyrus_output_path`: Set a custom output folder path in the format `/path/to/folder/`. Do not include `$HOME` or `~`.
 
-`g:papyrus_output_format`: Default output format is set to `pdf` which can be changed to any supported pandoc output format which are listed when running `pandoc --list-output-formats`.
+`g:papyrus_output_format`: Default output format is set to `pdf` which can be changed to any supported pandoc output format which is listed when running `pandoc --list-output-formats`.
 
 `g:papyrus_template`: Set a template from supported options. 
 
 ### Customization 
 
-If a command has an [optional argument](#commands) you can can add custom mappings for different compilation formats. For example:
+If a command has an [optional argument](#commands) you can add custom mappings for different compilation formats. For example:
 
 ```vim
 " Compile current file to pdf
@@ -113,7 +113,7 @@ After every compilation either the message `Papyrus: Compilation Succeeded!` wil
 
 ## Commands
 
-**Optional argument** allow you to change the current file output format. Possible output formats are listed when running `pandoc --list-output-formats`.
+**Optional argument** allows you to change the current file output format. Possible output formats are listed when running `pandoc --list-output-formats`.
 
 ### :PapyrusCompile \<optional\>
 
@@ -161,7 +161,7 @@ https://user-images.githubusercontent.com/95333017/220019833-a01ba926-bfc8-4dd8-
 
 ## Demo
 
-This is a demo from my notes on the [Book of Proof](https://www.people.vcu.edu/~rhammack/BookOfProof/Main.pdf). I'm using the [Vim Pandoc Syntax](https://github.com/vim-pandoc/vim-pandoc-syntax) plugin to automatically insert special characters and clean up the document. Also, in the demo you can see that pandoc supports the ability to insert Latex syntax inside the Markdown document.
+This is a demo from my notes on the [Book of Proof](https://www.people.vcu.edu/~rhammack/BookOfProof/Main.pdf). I'm using the [Vim Pandoc Syntax](https://github.com/vim-pandoc/vim-pandoc-syntax) plugin to automatically insert special characters and clean up the document. Also, in the demo, you can see that pandoc supports the ability to insert Latex syntax inside the Markdown document.
 
 https://user-images.githubusercontent.com/95333017/220041898-7326b76d-348e-4bf4-95dd-b4a879527ed5.mov
 
