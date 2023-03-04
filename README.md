@@ -1,12 +1,12 @@
 # Papyrus
 
-Automatically compile Markdown notes into beautiful Latex PDFs or other support pandoc formats!
+Automatically compile Markdown notes into beautiful Latex PDFs or other supported pandoc formats!
 
 ![Screenshot example of Papyrus](https://github.com/abeleinin/papyrus/blob/main/examples/example.png?raw=true)
 
 Theme: [material default-community](https://github.com/kaicataldo/material.vim)
 
-Papyrus is an asynchronous Markdown conversion plugin that allows users to have a latex-like editing experience while writing Markdown. By utilizing the [Pandoc](https://pandoc.org/) universal document converter you can write both Markdown and Latex syntax in the same file and convert it into a PDF or other Pandoc supported document types.
+Papyrus is an asynchronous Markdown conversion plugin that allows users to have a latex-like editing experience while writing Markdown. By utilizing the [Pandoc](https://pandoc.org/) universal document converter you can write Markdown and Latex syntax in the same file and convert it into a PDF or other Pandoc supported document types.
 
 **Features**
 
@@ -113,7 +113,7 @@ After every compilation either the message `Papyrus: Compilation Succeeded!` wil
 
 ## Commands
 
-**Optional argument** allows you to change the current file output format. Possible output formats are listed when running `pandoc --list-output-formats`.
+**Optional arguments** allow you to change the current file output format. Possible output formats are listed when running `pandoc --list-output-formats`.
 
 ### :PapyrusCompile \<optional\>
 
@@ -151,13 +151,11 @@ let g:papyrus_template = 'default'
  
 ### Default
 
-https://user-images.githubusercontent.com/95333017/220019753-b45b7ae5-59a0-4ac0-85e5-c228ff35544c.mov
-
+![Screenshot of default template](https://github.com/abeleinin/papyrus/blob/main/examples/default.png?raw=true)
 
 ### Lecture 
 
-https://user-images.githubusercontent.com/95333017/220019833-a01ba926-bfc8-4dd8-a6f3-d3f6bc611263.mov
-
+![Screenshot of lecture template](https://github.com/abeleinin/papyrus/blob/main/examples/lecture.png?raw=true)
 
 ## Demo
 
