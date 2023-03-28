@@ -21,7 +21,10 @@ Papyrus is an asynchronous Markdown conversion plugin that allows users to have 
 - [Configuration](#configuration)
 - [Errors Messages](#error-messages)
 - [Commands](#commands)
-- [Templates](#templates)
+- [Documentation](#documentation)
+  - [Images](#images)
+  - [Fonts](#fonts)
+  - [Templates](#templates)
 - [Demo](#demo)
 
 ## Requirements
@@ -139,8 +142,48 @@ Copies the specified template file into the current file from `/templates/md/g:p
 
 Runs `:PapyrusHeader` and `:PapyrusStart` to create a new editing environment for the specified template. 
 
+## Documentation 
 
-## Templates
+### Images
+
+```md
+# Insert image from current directory 
+
+![](image.jpeg)
+
+# Add figure caption
+
+!["Figure caption here"](image.jpeg)
+
+# Insert images from different directory 
+
+![](/path/to/image.jpeg)
+
+# Append {width="50%"} to adjust dimensions
+
+![](/path/to/image.jpeg){width="50%"}
+```
+
+### Fonts
+
+To add custom fonts you first need to verify that the font is downloaded to your systems. For example, on Mac, you can use the Font Book application to add any font from the internet. There are two ways to specify a font using Papyrus. First, you can use the mainfont variable in the YAML heading at the top of your markdown document:
+
+```yaml
+---
+title: Custom Font
+author: Author
+date: xx-xx-xxxx
+mainfont: Droid Sans Fallback
+---
+```
+
+The second way is to use the `g:papyrus_pandoc_args` variable in your `init.vim` or `.vimrc` file:
+
+```vim
+let g:papyrus_pandoc_args = '-V mainfont="Droid Sans Fallback"'
+```
+
+### Templates
 
 Papyrus supports two templates which you can view in the [pdf directory](https://github.com/abeleinin/papyrus/tree/main/templates/pdf). Custom template files can be created using [pandoc-latex-templates](https://github.com/Wandmalfarbe/pandoc-latex-template). If you create a cool template feel free to submit a pull request!
 
