@@ -1,6 +1,7 @@
 " Title:        Papyrus
 " Description:  Converts Markdown to PDF using Pandoc
-" Last Change:  22 February 2023 Maintainer:   Abe Leininger <https://github.com/abeleinin>
+" Last Change:  07 July 2023 
+" Maintainer:   Abe Leininger <https://github.com/abeleinin>
 
 function! papyrus#PapyrusCompile(output_format)
   if !empty(a:output_format)
@@ -18,6 +19,7 @@ function! papyrus#PapyrusCompile(output_format)
   else
     let cmd = ('pandoc --pdf-engine=' . g:papyrus_latex_engine . ' --template=' . g:papyrus_template . ' -o ' . path_to_file . ' ' . current_md_file)
   endif
+  let l:cursor_pos = getpos('.')
   if has('nvim')
     call setqflist([], 'r')
     call jobstart(cmd, {'on_stderr': function('papyrus#stderr_nvim'), 
@@ -27,6 +29,7 @@ function! papyrus#PapyrusCompile(output_format)
     call job_start(cmd, {'err_cb': function('papyrus#stderr_vim'), 
                        \ 'exit_cb': function('papyrus#exit_vim')})
   endif
+  call setpos('.', l:cursor_pos)
 endfunction
 
 function! papyrus#stderr_vim(job_id, data)
